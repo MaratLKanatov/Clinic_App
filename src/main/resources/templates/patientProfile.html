@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Best Clinic - Patient UI</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-expand-md navbar-dark"
+        style="background-color: tomato"
+      >
+        <div>
+          <a href="http://localhost:8080" class="navbar-brand">Patient UI</a>
+        </div>
+
+        <ul class="navbar-nav">
+          <li>
+            <a th:href="@{~/patientProfile}" class="nav-link">Profile</a>
+          </li>
+          <li>
+            <a th:href="@{~/patient/newAppointment}" class="nav-link">New Appointment</a>
+          </li>
+          <li>
+            <a th:href="@{~/patient/callMedicalHelp}" class="nav-link">Call Medical Help</a>
+          </li>
+          <li>
+            <a th:href="@{~/patient/history}" class="nav-link">History</a>
+          </li>
+          <li>
+            <a th:href="@{~/logout}" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <br />
+
+    <div class="row">
+      <div class="container">
+        <h3 class="text-center">Profile</h3>
+        <hr />
+        <div class="container text-left">
+          <a
+            th:href="@{~/patientProfile/edit}"
+            class="btn btn-success"
+            >Edit Profile</a
+          >
+        </div>
+        <br />
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Birthdate</th>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Gender</th>
+              <th>Telephone number</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td th:text="${patient.id}"></td>
+              <td th:text="${patient.birthdate}"></td>
+              <td th:text="${patient.firstname}"></td>
+              <td th:text="${patient.lastname}"></td>
+              <td th:text="${patient.gender}"></td>
+              <td th:text="${patient.telnum}"></td>
+              <td th:text="${patient.location}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

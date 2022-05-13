@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
+a:-webkit-any-link {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+html,
+body
+{
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.website
+{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 40px;
+    background: white;
+    text-align: center;
+    height: 760px;
+}
+
+.area-content {
+    background: #f7f7f7;
+    border: 3px solid white;
+    border-radius: 15px;
+}
+
+.sidebar {
+    display: inline-block;
+    width: 20%;
+    margin-right: 1%;
+    font-weight: 600;
+}
+
+.wrapper {
+    display: inline-block;
+    width: 79%;
+    margin-left: 1%;
+}
+
+.avatar {
+    width: 100%;
+    padding-top: 5%;
+    margin-bottom: 40px;
+}
+
+.avatar img {
+    width: 75%;
+}
+
+.menu-section {
+    padding-left: 8%;
+    padding-right: 8%;
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: block;
+    border: 1px solid #f7f7f7;
+}
+
+.menu-section:hover {
+    border: 1px solid #03c;
+    background: rgba(10,68,192, 0.5);
+	color: #f7f7f7;
+	box-shadow: inset 0 0 0 3px #f7f7f7;
+    cursor: pointer;
+}
+
+.menu-section.checked-section:hover {
+    border: 1px solid #f7f7f7;
+    background: #f7f7f7;
+	color: #03c;
+	box-shadow: inset 0 0 0 0px #f7f7f7;
+}
+
+.menu-section .menu-logo {
+    width: 12%;
+    text-align: center;
+}
+
+.menu-section div {
+    display: inline-block;
+}
+
+.menu .checked-section {
+    color: #03c;
+}
+
+.header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.header .logo {
+    margin-left: 40px;
+    text-align: left;
+    font-size: 23px;
+    font-weight: 600;
+    color: #0a2646;
+}
+
+.content {
+    margin-bottom: 20px;
+}
+
+.content .row.full {
+    padding: 10px;
+}
+
+.content .row.full .block {
+    width: 96%;
+}
+
+.content .block {
+    display: inline-block;
+    width: 29.9%;
+    height: 250px;
+    padding: 5px;
+}
+
+.content .block.middle {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.content .block.mini {
+    height: 175px;
+    margin-bottom: 20px;
+    background-color: #eceffd;
+    text-align: left;
+}
+
+.block.mini>div {
+    display: inline-block;
+    vertical-align: top;
+    height: 145px;
+    padding: 15px;
+}
+
+.block.mini .words-icon {
+    font-size: 60px;
+    color: #03c;
+    line-height: 145px;
+}
+
+.block.mini .words-icon i {
+    border: 3px solid #03c;
+    padding: 15px;
+    border-radius: 150px;
+}
+
+.block.mini .words {
+    display: inline-flex;
+    justify-content: center;
+    align-content: stretch;
+    flex-direction: column;
+}
+
+.block.mini .words div {
+    line-height: normal;
+}
+
+.footer {
+    color: #0a2646;
+    padding: 10px;
+}
+
+.block.mini .w-value {
+    font-size: 35px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.block {
+    vertical-align: top;
+}
+
+.block table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid transparent;
+}
+
+table th {
+    text-align: left;
+}
+
+thead th:nth-child(1) {
+    width: 24%;
+}
+
+thead th:nth-child(2) {
+    width: 52%;
+}
+
+thead th:nth-child(3) {
+    width: 24%;
+}
+
+table {
+    margin: 20px;
+    color: #03c;
+    text-align: left;
+}
+
+table {
+    font-weight: 400;
+}
+
+table caption {
+    text-align: left;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+table thead {
+    color: #0a2646;
+    
+}
+
+table thead th {
+    font-weight: 600;
+}
+
+table tbody tr th:first-child {
+    margin-right: 5px;
+}
+
+table tbody i.fa {
+    font-size: 50px;
+    color: black;
+}
+
+table tfoot {
+    margin-top: 5px;
+}
+
+table .useranddiagnosis {
+
+}
+
+table .useranddiagnosis .diagnosis {
+    font-size: 15px;
+    color: black;
+}
+
+table .useranddiagnosis .user {
+    text-transform: uppercase;
+}
+
+table tfoot th {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+table tfoot th a.btn-href {
+    
+    color: #03c;
+}

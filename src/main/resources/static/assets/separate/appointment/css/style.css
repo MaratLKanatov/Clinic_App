@@ -1,0 +1,73 @@
+.block.mini {
+    width: 98%;
+}
+
+.block.mini>div {
+    display: block;
+    vertical-align: top;
+    padding: 0%;
+    height: auto;
+}
+
+.userdetails>div {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.content .block.mini {
+    height: auto;
+    padding: 25px;
+}
+
+.content {
+    color: #03c;
+}
+
+.head {
+    margin-bottom: 20px;
+}
+
+.head span i.fa {
+    font-weight: 600;
+}
+
+.userdetails {
+    margin-bottom: 20px;
+}
+
+.useranddiagnosis .diagnosis {
+    font-size: 15px;
+    color: black;
+}
+
+.useranddiagnosis .user {
+    text-transform: uppercase;
+    color: black;
+}
+
+.userdetails .avatar2 {
+    font-size: 41px;
+}
+
+.info-table {
+    margin-bottom: 20px;
+}
+
+.info-table table {
+    table-layout: fixed;
+}
+
+.listtile {
+    color: black;
+    font-size: 17px;
+}
+
+.listtile .title {
+    font-weight: 600;
+}
+
+.block table {
+    width: 460px;
+    margin: 0;
+}
+

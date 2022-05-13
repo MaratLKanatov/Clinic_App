@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{~/assets/separate/doctorUI/css/style.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{~/assets/separate/appointment/css/style.css}" />
+    <title>Doctor UI</title>
+
+    <style>
+      .form-left {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 50px;
+      }
+      .form-right {
+        display: inline-block;
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="website">
+      <div class="sidebar area-content">
+        <div class="avatar">
+          <img th:src="@{~/assets/separate/doctorUI/img/avatar.png}" alt="" class="avatar-pic" />
+        </div>
+        <div class="menu">
+          <a class="menu-section" th:href="@{~/doctor/dashboard}">
+            <div class="menu-logo">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Dashboard</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/doctor/appointment}">
+            <div class="menu-logo">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Appointment</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/doctor/history}">
+            <div class="menu-logo">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>History</span>
+            </div>
+          </a>
+          <a class="menu-section checked-section" th:href="@{~/doctor/profileEdit}">
+            <div class="menu-logo">
+              <i class="fa fa-gear" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Profile</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/logout}">
+            <div class="menu-logo">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Logout</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="header area-content">
+          <div class="logo">
+            <span>Profile</span>
+          </div>
+        </div>
+        <div class="content">
+          <div class="blocks">
+            <div class="row">
+              <div class="block mini area-content" style="padding: 0px">
+                <div class="editForm">
+                  <form
+                    class="form-detail"
+                    action="#"
+                    method="post"
+                    id="myform"
+                    style="padding: 25px"
+                  >
+                    <div class="form-left">
+                      <h2>General Infomation</h2>
+                      <div class="form-row">
+                        <select name="title">
+                          <option class="option" value="title">
+                            Occupation
+                          </option>
+                          <option class="option" value="businessman">
+                            Patient
+                          </option>
+                          <option class="option" value="reporter">
+                            Doctor
+                          </option>
+                        </select>
+                        <span class="select-btn">
+                          <i class="zmdi zmdi-chevron-down"></i>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                        <div class="form-row form-row-1">
+                          <input
+                            type="text"
+                            name="first_name"
+                            id="first_name"
+                            class="input-text"
+                            placeholder="First Name"
+                            required
+                          />
+                        </div>
+                        <div class="form-row form-row-2">
+                          <input
+                            type="text"
+                            name="last_name"
+                            id="last_name"
+                            class="input-text"
+                            placeholder="Last Name"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <input
+                          type="text"
+                          name="company"
+                          class="company"
+                          id="company"
+                          placeholder="Patronic Name (Optional)"
+                        />
+                      </div>
+                      <div class="form-row">
+                        <select name="position">
+                          <option value="position">Gender</option>
+                          <option value="director">Female</option>
+                          <option value="manager">Male</option>
+                        </select>
+                        <span class="select-btn">
+                          <i class="zmdi zmdi-chevron-down"></i>
+                        </span>
+                      </div>
+                      <div class="form-row">
+                        <input
+                          type="tel"
+                          name="telephone"
+                          class="street"
+                          id="street"
+                          placeholder="Telephone Number"
+                          required
+                        />
+                      </div>
+                      <div class="form-row">
+                        <input
+                          type="text"
+                          name="your_email"
+                          id="your_email"
+                          class="input-text"
+                          required
+                          pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"
+                          placeholder="Your Email"
+                        />
+                      </div>
+                      <div class="form-row">
+                        <input
+                          type="text"
+                          name="your_specialization"
+                          id="your_specialization"
+                          class="input-text"
+                          required
+                          placeholder="Your Specialization"
+                        />
+                      </div>
+                      <div class="form-row">
+                        <input
+                          type="date"
+                          name="additional"
+                          class="additional"
+                          id="date"
+                          placeholder="Date"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="form-right">
+                      <h2>Details</h2>
+                      <div class="form-row">
+                        <select name="country">
+                          <option value="country">Country</option>
+                          <option value="Vietnam">Kazakhstan</option>
+                          <option value="Malaysia">Russia</option>
+                          <option value="India">Other country</option>
+                        </select>
+                        <span class="select-btn">
+                          <i class="zmdi zmdi-chevron-down"></i>
+                        </span>
+                      </div>
+                      <div class="form-row">
+                        <input
+                          type="text"
+                          name="additional"
+                          class="additional"
+                          id="additional"
+                          placeholder="999 Street, City"
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <div class="form-row form-row-3">
+                          <input
+                            type="text"
+                            name="business"
+                            class="business"
+                            id="business"
+                            placeholder="House number"
+                            required
+                          />
+                        </div>
+                        <div
+                          class="form-row form-row-4"
+                          style="padding-left: 0px; width: 28%"
+                        >
+                          <select name="employees">
+                            <option value="employees">Home type</option>
+                            <option value="trainee">House</option>
+                            <option value="colleague">Flat</option>
+                            <option value="associate">Another</option>
+                          </select>
+                          <span class="select-btn">
+                            <i class="zmdi zmdi-chevron-down"></i>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="form-row-last">
+                        <input
+                          type="submit"
+                          name="register"
+                          class="register"
+                          value="Save"
+                        />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer area-content">
+          <div class="credentials">
+            <span>Made in Kazakhstan. IITU 2022. Kanatov Marat.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

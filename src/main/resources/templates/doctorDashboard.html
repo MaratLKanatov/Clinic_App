@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{~/assets/separate/doctorUI/css/style.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Doctor UI</title>
+  </head>
+  <body>
+    <div class="website">
+      <div class="sidebar area-content">
+        <div class="avatar">
+          <img th:src="@{~/assets/separate/doctorUI/img/avatar.png}" alt="" class="avatar-pic" />
+        </div>
+        <div class="menu">
+          <a class="menu-section checked-section" th:href="@{~/doctor/dashboard}">
+            <div class="menu-logo">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Dashboard</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/doctor/appointment}">
+            <div class="menu-logo">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Appointment</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/doctor/history}">
+            <div class="menu-logo">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>History</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/doctor/profileEdit}">
+            <div class="menu-logo">
+              <i class="fa fa-gear" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Profile</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/logout}">
+            <div class="menu-logo">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Logout</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="header area-content">
+          <div class="logo">
+            <span>Dashboard</span>
+          </div>
+        </div>
+        <div class="content">
+          <div class="blocks">
+            <div class="row">
+              <div class="block mini area-content">
+                <div class="words-icon">
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                </div>
+                <div class="words">
+                  <div class="w-title">
+                    <span>Total Patient</span>
+                  </div>
+                  <div class="w-value">
+                    <span th:text="${statistic.getPatientCount()}"></span>
+                  </div>
+                  <div class="w-additional">
+                    <span>Till today</span>
+                  </div>
+                </div>
+              </div>
+              <div class="block mini middle area-content">
+                <div class="words-icon">
+                  <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                </div>
+                <div class="words">
+                  <div class="w-title">
+                    <span>Today Patient</span>
+                  </div>
+                  <div class="w-value">
+                    <span th:text="${statistic.getDailyPatientCount()}"></span>
+                  </div>
+                  <div class="w-additional">
+                    <span>05.05.2022</span>
+                  </div>
+                </div>
+              </div>
+              <div class="block mini area-content">
+                <div class="words-icon">
+                  <i class="fa fa-medkit" aria-hidden="true"></i>
+                </div>
+                <div class="words">
+                  <div class="w-title">
+                    <span>Today Appointments</span>
+                  </div>
+                  <div class="w-value">
+                    <span th:text="${statistic.getTodayAppointments()}"></span>
+                  </div>
+                  <div class="w-additional">
+                    <span>05.05.2022</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row full area-content">
+              <!-- <div class="block area-content">
+                <span>content</span>
+              </div> -->
+              <div class="block middle area-content">
+                <table>
+                  <caption>
+                    Today Appointment
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Patient</th>
+                      <th scope="col">Name/Diagnosis</th>
+                      <th scope="col">Meeting Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:if="${appointments.size() < 3}" th:each="appointment, custStat : ${appointments}">
+                      <th scope="row">
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                      </th>
+                      <td>
+                        <div class="useranddiagnosis">
+                          <a th:href="${'http://localhost:8080/doctor/appointment/'+appointment.getId()}" style="color: #007bff">
+                            <div class="user" th:text="${appointment.getPatient().firstname + ' ' + appointment.getPatient().lastname}"></div>
+                          </a>
+                          <div class="diagnosis" th:text="${appointment.getReason()}"></div>
+                        </div>
+                      </td>
+                      <td><div class="timeStatus" th:text="${appointment.getMeetingTimeString()}"></div></td>
+                    </tr>
+                    <th:block th:if="${appointments.size() > 2}">
+                      <tr>
+                        <th scope="row">
+                          <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        </th>
+                        <td>
+                          <div class="useranddiagnosis">
+                            <a th:href="${'http://localhost:8080/doctor/appointment/'+appointments.get(0).getId()}" style="color: #007bff">
+                              <div class="user" th:text="${appointments.get(0).getPatient().firstname + ' ' + appointments.get(0).getPatient().lastname}"></div>
+                            </a>
+                            <div class="diagnosis" th:text="${appointments.get(0).getReason()}"></div>
+                          </div>
+                        </td>
+                        <td><div class="timeStatus" th:text="${appointments.get(0).getMeetingTimeString()}"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        </th>
+                        <td>
+                          <div class="useranddiagnosis">
+                            <a th:href="${'http://localhost:8080/doctor/appointment/'+appointments.get(1).getId()}" style="color: #007bff">
+                              <div class="user" th:text="${appointments.get(1).getPatient().firstname + ' ' + appointments.get(1).getPatient().lastname}"></div>
+                            </a>
+                            <div class="diagnosis" th:text="${appointments.get(1).getReason()}"></div>
+                          </div>
+                        </td>
+                        <td><div class="timeStatus" th:text="${appointments.get(1).getMeetingTimeString()}"></div></td>
+                      </tr>
+                    </th:block>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th scope="row" colspan="3">
+                        <a class="btn-href" th:href="@{~/doctor/history}">See All</a>
+                      </th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer area-content">
+          <div class="credentials">
+            <span>Made in Kazakhstan. IITU 2022. Kanatov Marat.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

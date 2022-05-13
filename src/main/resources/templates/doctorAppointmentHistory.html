@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor UI</title>
+    <link rel="stylesheet" th:href="@{~/assets/separate/doctorUI/css/style.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        tr.OK {
+            background: #fdf59a;
+        }
+
+        tr.OK a {
+            color: green;
+        }
+
+        tr.WAITING a {
+            color: red;
+        }
+
+        tr.WAITING {
+            color: black;
+        }
+
+        thead th:nth-child(1) {
+            width: 5%;
+        }
+
+        thead th:nth-child(2) {
+            width: 25%;
+        }
+
+        thead th:nth-child(3) {
+            width: 24%;
+        }
+        thead th:nth-child(4) {
+            width: 10%;
+        }
+        thead th:nth-child(5) {
+            width: 18%;
+        }
+        thead th:nth-child(6) {
+            width: 15%;
+        }
+        thead th:nth-child(7) {
+            width: 25%;
+        }
+        thead th:nth-child(8) {
+            width: 5%;
+        }
+    </style>
+</head>
+<body>
+<div class="website">
+    <div class="sidebar area-content">
+        <div class="avatar">
+            <img th:src="@{~/assets/separate/doctorUI/img/avatar.png}" alt="" class="avatar-pic" />
+        </div>
+        <div class="menu">
+            <a class="menu-section" th:href="@{~/doctor/dashboard}">
+                <div class="menu-logo">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+                <div class="menu-section-text">
+                    <span>Dashboard</span>
+                </div>
+            </a>
+            <a class="menu-section" th:href="@{~/doctor/appointment}">
+                <div class="menu-logo">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+                <div class="menu-section-text">
+                    <span>Appointment</span>
+                </div>
+            </a>
+            <a class="menu-section checked-section" th:href="@{~/doctor/history}">
+                <div class="menu-logo">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <div class="menu-section-text">
+                    <span>History</span>
+                </div>
+            </a>
+            <a class="menu-section" th:href="@{~/doctor/profileEdit}">
+                <div class="menu-logo">
+                    <i class="fa fa-gear" aria-hidden="true"></i>
+                </div>
+                <div class="menu-section-text">
+                    <span>Profile</span>
+                </div>
+            </a>
+            <a class="menu-section" th:href="@{~/logout}">
+                <div class="menu-logo">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </div>
+                <div class="menu-section-text">
+                    <span>Logout</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="header area-content">
+            <div class="logo">
+                <span>Dashboard</span>
+            </div>
+        </div>
+        <div class="content">
+            <div class="blocks">
+                <div class="row">
+                    <div class="container">
+                        <h3 class="text-center">Appointments</h3>
+                        <hr />
+                        <br />
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Reason</th>
+                                <th>Report</th>
+                                <th>Status</th>
+                                <th>Patient</th>
+                                <th>Created</th>
+                                <th>Meeting</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="a, custStat: ${appointments}" th:classappend="${a.status.equals('OK')} ? 'OK' : 'WAITING'">
+                                <td th:text="${a.id}"></td>
+                                <td th:text="${a.reason}"></td>
+                                <td th:text="${a.report}"></td>
+                                <td th:text="${a.status}"></td>
+                                <td th:text="${a.patient.firstname + ' ' + a.patient.lastname}"></td>
+                                <td th:text="${a.getCreatedTimeString()}"></td>
+                                <td th:text="${a.getMeetingTimeString()}"></td>
+                                <td><a class="h4" th:href="'http://localhost:8080/doctor/appointment/' + ${a.getId()}">Edit</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer area-content">
+            <div class="credentials">
+                <span>Made in Kazakhstan. IITU 2022. Kanatov Marat.</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

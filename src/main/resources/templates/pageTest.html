@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@environment.getProperty('app.title')}">A</title>
+</head>
+<body>
+    <div th:each="log, custStat : ${logs}">
+        <div th:text="${log}"></div>
+    </div>
+</body>
+</html>

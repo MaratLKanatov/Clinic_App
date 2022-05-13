@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@environment.getProperty('app.title')}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/separate/admin/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/separate/admin/css/fontstyle.css}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!--navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <span class="navbar-toggler-icon" data-bs-target="#offcanvasExample"></span>
+        </button>
+        <a class="navbar-brand fw-bold text-uppercase me-auto" href="#" th:text="${@environment.getProperty('app.admin.title')}"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex ms-auto">
+                <div class="input-group my-3 my-lg-0">
+                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle pressOnAppear" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{~/admin/profile}">Profile</a></li>
+                        <li><a class="dropdown-item" th:href="@{~/logout}">Exit</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--navbar end-->
+<!--offcanvas-->
+<div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample" data-bs-backdrop="false" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-body">
+        <nav class="navbar-dark">
+            <ul class="navbar-nav">
+                <li>
+                    <div class="text-muted small fw-bold text-uppercase px-3">
+                        CORE
+                    </div>
+                </li>
+                <li>
+                    <a th:href="@{~/admin}" class="nav-link px-3 active">
+                        <span class="me-2">
+                            <i class="bi bi-speedometer2"></i>
+                        </span>
+                        <span>
+                            Dashboard
+                        </span>
+                    </a>
+                </li>
+                <li class="my-4">
+                    <hr class="dropdown-divider" />
+                </li>
+                <li>
+                    <div class="text-muted small fw-bold text-uppercase px-3">
+                        Interface
+                    </div>
+                </li>
+                <li>
+                    <a class="nav-link px-3 sidebar-link" id="clickOnReady" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <span class="me-2">
+                            <i class="icon- icon-database"></i>
+                        </span>
+                        <span>Entity</span>
+                        <span class="right-icon ms-auto"><i class="bi bi-chevron-down"></i></span>
+                    </a>
+                    <div class="collapse" id="collapseExample">
+                        <div>
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a th:href="@{~/admin/doctor}" class="nav-link px-3">
+                                        <span class="me-2 iconwidth">
+                                            <i class="icon- icon-doctor"></i>
+                                        </span>
+                                        <span>Doctor</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{~/admin/patient}" class="nav-link px-3">
+                                        <span class="me-2 iconwidth">
+                                            <i class="icon- icon-patient"></i>
+                                        </span>
+                                        <span>Patient</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{~/admin/specialization}" class="nav-link px-3">
+                                        <span class="me-2 iconwidth">
+                                            <i class="icon- icon-specialization"></i>
+                                        </span>
+                                        <span>Specialization</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{~/admin/appointment}" class="nav-link px-3">
+                                        <span class="me-2 iconwidth">
+                                            <i class="icon- icon-appointment"></i>
+                                        </span>
+                                        <span>Appointment</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{~/admin/schedule}" class="nav-link px-3">
+                                        <span class="me-2 iconwidth">
+                                            <i class="icon- icon-schedule"></i>
+                                        </span>
+                                        <span>Schedule</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!--offcanvas end-->
+<!--main-->
+<main class="mt-5 pt-3 form-main">
+    <div class="container-fluid">
+        <div class="row my-3">
+            <div class="col-md-12 fw-bold fs-3 text-center">
+                Doctor CRUD
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white text-center text-uppercase fw-bold">
+                        <span th:if="${doctor.id == null}">Create</span>
+                        <span th:if="${doctor.id != null}">Edit</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <form th:action="@{~/admin/doctor/new}" method="post" th:object="${doctor}">
+                                <div class="row mb-3">
+                                    <input type="hidden" th:if="${doctor.id != null}" th:field="*{id}">
+                                    <input type="hidden" th:if="${doctor.id != null}" th:field="*{user.id}">
+                                    <div class="col">
+                                        <label for="input1" class="form-label">Email / Username</label>
+                                        <input type="email" class="form-control" id="input1" th:field="*{user.email}">
+                                    </div>
+                                    <div class="col">
+                                        <label for="input2" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="input2" th:field="*{user.password}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="input3" class="form-label">Firstname</label>
+                                        <input type="text" class="form-control" id="input3" th:field="*{firstname}">
+                                    </div>
+                                    <div class="col">
+                                        <label for="input4" class="form-label">Lastname</label>
+                                        <input type="text" class="form-control" id="input4" th:field="*{lastname}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="input7" class="form-label">Location</label>
+                                        <input type="text" class="form-control" id="input7" th:field="*{location}">
+                                    </div>
+                                    <div class="col">
+                                        <label for="input8" class="form-label">Telephone Number</label>
+                                        <input type="text" class="form-control" id="input8" th:field="*{telnum}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">Gender</label>
+                                        <div>
+                                            <input class="form-check-input" type="radio" id="input9" name="gender" value="Male" th:field="*{gender}">
+                                            <label class="form-check-label me-3" for="input9">Male</label>
+                                            <input class="form-check-input" type="radio" id="input10" name="gender" value="Female" th:field="*{gender}">
+                                            <label class="form-check-label" for="input10">Female</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label for="startDate">Birthdate</label>
+                                        <input id="startDate" class="form-control" type="date" name="birthdate" th:field="*{birthdate}"/>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label" for="specialization-select">Specialization</label>
+                                        <select class="form-select" id="specialization-select" th:field="*{specialization}">
+                                            <option value="99999" selected>Select</option>
+                                            <th:block th:each="specialization: ${listSpecializations}">
+                                                <option th:text="${specialization.getName()}" th:value="${specialization.getId()}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label" for="schedule-select">Schedule</label>
+                                        <select class="form-select" id="schedule-select" th:field="*{schedule}">
+                                            <option value="99999" selected>Select</option>
+                                            <th:block th:each="schedule: ${listSchedules}">
+                                                <option th:text="${schedule.getName()}" th:value="${schedule.getId()}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label" for="status-select">Status</label>
+                                        <select class="form-select" id="status-select" th:field="*{user.status}">
+                                            <option value="99999" selected>Select</option>
+                                            <th:block th:each="status: ${T(kanatovm.bestclinic.model.enums.Status).values()}">
+                                                <option th:field="*{user.status}" th:text="${status}" th:value="${status}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col text-end">
+                                        <button type="submit" class="btn btn-primary" th:if="${doctor.id == null}">Create</button>
+                                        <button type="submit" class="btn btn-primary" th:if="${doctor.id != null}">Edit</button>
+                                    </div>
+                                    <div class="col text-start">
+                                        <a class="btn btn-secondary" th:href="@{~/admin/doctor}" role="button">Cancel</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--main end-->
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.js}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script th:src="@{/assets/separate/admin/js/script.js}"></script>
+</body>
+</html>

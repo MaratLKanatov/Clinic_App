@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{~/assets/separate/doctorUI/css/style.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{~/assets/separate/appointment/css/style.css}" />
+    <title>Doctor UI</title>
+  </head>
+  <body>
+    <div class="website">
+      <div class="sidebar area-content">
+        <div class="avatar">
+          <img th:src="@{~/assets/separate/doctorUI/img/avatar.png}" alt="" class="avatar-pic" />
+        </div>
+        <div class="menu">
+          <a class="menu-section" th:href="@{~/doctor/dashboard}">
+            <div class="menu-logo">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Dashboard</span>
+            </div>
+          </a>
+          <a class="menu-section checked-section" th:href="@{~/doctor/appointment}">
+            <div class="menu-logo">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Appointment</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/doctor/history}">
+            <div class="menu-logo">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>History</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/doctor/profileEdit}">
+            <div class="menu-logo">
+              <i class="fa fa-gear" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Profile</span>
+            </div>
+          </a>
+          <a class="menu-section" th:href="@{~/logout}">
+            <div class="menu-logo">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </div>
+            <div class="menu-section-text">
+              <span>Logout</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="header area-content">
+          <div class="logo">
+            <span>Appointment</span>
+          </div>
+        </div>
+        <div class="content">
+          <div class="blocks">
+            <div class="row">
+              <div class="block mini area-content">
+                <div class="head">
+                  <span>Patient Details</span>
+                </div>
+                <div class="userdetails">
+                  <div class="avatar2">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                  </div>
+                  <div class="useranddiagnosis">
+                    <div class="user" th:text="${appointment.patient.firstname + ' ' + appointment.patient.lastname}"></div>
+                    <div class="diagnosis" th:text="${appointment.reason}"></div>
+                  </div>
+                  <div class="useranddiagnosis">
+                    <div class="user">Patient ID</div>
+                    <div class="diagnosis" th:text="${appointment.patient.id}"></div>
+                  </div>
+                  <div class="useranddiagnosis">
+                    <div class="user">Appointment ID</div>
+                    <div class="diagnosis" th:text="${appointment.id}"></div>
+                  </div>
+                </div>
+                <div class="info-table">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="listtile">
+                            <div class="title">
+                              <span>D.O.B</span>
+                            </div>
+                            <div class="additionaltext">
+                              <span th:text="${appointment.patient.birthdate}"></span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="listtile">
+                            <div class="title">
+                              <span>Sex</span>
+                            </div>
+                            <div class="additionaltext">
+                              <span th:text="${appointment.patient.gender}"></span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="listtile">
+                            <div class="title">
+                              <span>Weight</span>
+                            </div>
+                            <div class="additionaltext">
+                              <span>70 Kg</span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="listtile">
+                            <div class="title">
+                              <span>Last Appointment</span>
+                            </div>
+                            <div class="additionaltext">
+                              <span>None</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="listtile">
+                            <div class="title">
+                              <span>Height</span>
+                            </div>
+                            <div class="additionaltext">
+                              <span>189 cm</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="listtile">
+                            <div class="title">
+                              <span>Registration Date</span>
+                            </div>
+                            <div class="additionaltext">
+                              <span>5 May 2022</span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="report">
+                  <div class="form-header">
+                    <span>Report:</span>
+                  </div>
+                  <form th:action="@{~/doctor/appointment}" method="post" th:object="${appointment}">
+
+                    <input type="hidden" name="id" th:field="*{id}"/>
+
+
+                       <input type="hidden" th:field="*{reason}"
+                                                   class="form-control" required="required">
+
+
+                    <input type="hidden" th:field="*{createdTime}"
+                           class="form-control">
+
+                       <input type="hidden" th:field="*{meetingTime}"
+                                                 class="form-control">
+
+
+
+                      <input type="hidden" th:field="*{doctor}" th:value="${appointment.doctor.id}"
+                                                 class="form-control">
+
+                    <input type="hidden" th:field="*{patient}" th:value="${appointment.patient.id}"
+                           class="form-control">
+
+
+                    <input type="text" name="doctorReport" id="doctorReport" th:field="*{report}" />
+                    <input type="submit" value="SAVE" />
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer area-content">
+          <div class="credentials">
+            <span>Made in Kazakhstan. IITU 2022. Kanatov Marat.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

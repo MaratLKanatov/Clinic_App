@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@environment.getProperty('app.title')}">A</title>
+    <link th:rel="stylesheet" th:href="@{/assets/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{/assets/css/bootstrap-datepicker.standalone.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <nav
+            class="navbar navbar-expand-md navbar-dark"
+            style="background-color: tomato"
+    >
+        <div>
+            <a href="http://localhost:8080" class="navbar-brand">Patient UI</a>
+        </div>
+
+        <ul class="navbar-nav">
+            <li>
+                <a th:href="@{~/patientProfile}" class="nav-link">Profile</a>
+            </li>
+            <li>
+                <a th:href="@{~/patient/newAppointment}" class="nav-link">New Appointment</a>
+            </li>
+            <li>
+                <a th:href="@{~/patient/callMedicalHelp}" class="nav-link">Call Medical Help</a>
+            </li>
+            <li>
+                <a th:href="@{~/logout}" class="nav-link">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<br />
+
+<div class="container col-md-5">
+    <div class="card">
+        <div class="card-body">
+            <form id="myForm" th:if="${!isNewAppointment}" th:action="@{~/patient/callMedicalHelp}" method="post" th:object="${dto}">
+                <caption>
+                    <h2>Call Medical Help</h2>
+                </caption>
+                <fieldset class="form-group">
+                    <label>Specialization</label>
+                    <select id="selectSpecialization" th:field="*{specialization}" class="form-control custom-select mr-sm-2" required>
+                        <option selected value="9999">Choose...</option>
+                        <th:block th:each="specialization: ${listSpecializations}">
+                            <option th:text="${specialization.getName()}" th:value="${specialization.id}"></option>
+                        </th:block>
+                    </select>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Doctor</label>
+                    <select id="selectDoctor" th:field="*{doctor_id}" class="form-control custom-select mr-sm-2" required>
+                        <option selected value="9999">Choose...</option>
+                        <th:block th:each="doctorr: ${listDoctors}">
+                            <option th:text="${doctorr.firstname + ' ' + doctorr.lastname}" th:value="${doctorr.id}"></option>
+                        </th:block>
+                    </select>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="meeting">Date of meeting</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control" id="meeting" autocomplete="off" th:field="*{meeting}" required/>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Hour/Minute</label>
+                    <select th:field="*{hourMinuteStr}" class="form-control" required>
+                        <th:block th:each="hourAndMinute: ${dto.getHourMinutesList()}">
+                            <option th:text="${hourAndMinute.toString()}" th:value="${hourAndMinute.toString2()}"></option>
+                        </th:block>
+                    </select>
+                </fieldset>
+
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+
+            <form id="myForm" th:if="${isNewAppointment}" th:action="@{~/patient/newAppointment}" method="post" th:object="${dto}">
+                <caption>
+                    <h2>New Appointment</h2>
+                </caption>
+
+
+                <fieldset class="form-group">
+                    <label>Reason</label> <input type="text" th:field="*{reason}"
+                                                 class="form-control" required="required">
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Specialization</label>
+                    <select id="selectSpecialization" th:field="*{specialization}" class="form-control custom-select mr-sm-2" required>
+                        <option selected value="9999">Choose...</option>
+                        <th:block th:each="specialization: ${listSpecializations}">
+                            <option th:text="${specialization.getName()}" th:value="${specialization.id}"></option>
+                        </th:block>
+                    </select>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Doctor</label>
+                    <select id="selectDoctor" th:field="*{doctor_id}" class="form-control custom-select mr-sm-2" required>
+                        <option selected value="9999">Choose...</option>
+                        <th:block th:each="doctorr: ${listDoctors}">
+                            <option th:text="${doctorr.firstname + ' ' + doctorr.lastname}" th:value="${doctorr.id}"></option>
+                        </th:block>
+                    </select>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="meeting">Date of meeting</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control" id="meeting" autocomplete="off" th:field="*{meeting}" required/>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Hour/Minute</label>
+                    <select th:field="*{hourMinuteStr}" class="form-control" required>
+                        <th:block th:each="hourAndMinute: ${dto.getHourMinutesList()}">
+                            <option th:text="${hourAndMinute.toString()}" th:value="${hourAndMinute.toString2()}"></option>
+                        </th:block>
+                    </select>
+                </fieldset>
+
+                <button type="submit" class="btn btn-success">Next</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script th:src="@{/assets/js/bootstrap-datepicker.js}"></script>
+<script>
+    $('.input-group.date').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
+<script>
+    $('#meeting').change(
+        function(){
+            form = document.getElementById('myForm');
+            form.action = '/patient/newAppointment/change';
+            form.submit();
+        });
+    $('#selectDoctor').change(
+        function(){
+            form = document.getElementById('myForm');
+            form.action = '/patient/newAppointment/change';
+            form.submit();
+        });
+    $('#selectSpecialization').change(
+        function(){
+            form = document.getElementById('myForm');
+            form.action = '/patient/newAppointment/change';
+            form.submit();
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Best Clinic - Patient UI</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-expand-md navbar-dark"
+        style="background-color: tomato"
+      >
+        <div>
+          <a href="http://localhost:8080" class="navbar-brand"> Patient UI</a>
+        </div>
+
+        <ul class="navbar-nav">
+          <li>
+            <a th:href="@{~/patientProfile}" class="nav-link">Profile</a>
+          </li>
+          <li>
+            <a th:href="@{~/patient/newAppointment}" class="nav-link">New Appointment</a>
+          </li>
+          <li>
+            <a th:href="@{~/patient/callMedicalHelp}" class="nav-link">Call Medical Help</a>
+          </li>
+          <li>
+            <a th:href="@{~/logout}" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <br />
+    <div class="container col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <form
+            th:action="@{~/patientProfile/edit}"
+            method="post"
+            th:object="${patient}"
+          >
+            <caption>
+              <h2>Edit</h2>
+            </caption>
+
+            <input type="hidden" name="id" th:field="*{id}" />
+
+
+
+              <input
+                      type="hidden"
+                      th:field="*{birthdate}"
+                      class="form-control"
+                      required="required"
+              />
+
+
+            <fieldset class="form-group">
+              <label>First Name</label>
+              <input
+                type="text"
+                th:field="*{firstname}"
+                id="customer_firstname"
+                class="form-control"
+                required="required"
+              />
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Last Name</label>
+              <input
+                type="text"
+                th:field="*{lastname}"
+                id="customer_lastname"
+                class="form-control"
+              />
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Gender</label>
+              <select class="form-control" name="position" th:field="*{gender}">
+                <option value="gender">Gender</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Telephone Number</label>
+              <input
+                type="text"
+                th:field="*{telnum}"
+                id="customer_tel_num"
+                class="form-control"
+              />
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Location</label>
+              <input
+                type="text"
+                th:field="*{location}"
+                id="customer_address"
+                class="form-control"
+              />
+            </fieldset>
+            <button type="submit" class="btn btn-success">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
