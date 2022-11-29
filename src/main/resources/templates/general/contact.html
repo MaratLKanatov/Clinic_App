@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="http://localhost:8080/assets/general/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://localhost:8080/assets/general/css/swiper.min.css">
+    <link rel="stylesheet" href="http://localhost:8080/assets/general/style.css">
+</head>
+<body class="single-page">
+    <header class="site-header">
+        <div class="nav-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+                        <div class="site-branding d-flex align-items-center">
+                            <a class="d-block" href="index.html" rel="home"><img class="d-block" src="http://localhost:8080/assets/general/images/logo.png" alt="logo"></a>
+                        </div><!-- .site-branding -->
+
+                        <nav class="site-navigation d-flex justify-content-end align-items-center">
+                            <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
+                                <li><a th:href="@{/}">Home</a></li>
+                                <li><a th:href="@{~/aboutus}">About us</a></li>
+                                <li><a th:href="@{~/services}">Services</a></li>
+                                <li><a th:href="@{~/news}">News</a></li>
+                                <li class="current-menu-item"><a th:href="@{~/contact}">Contact</a></li>
+
+                                <li class="call-btn button gradient-bg mt-3 mt-md-0">
+                                    <a class="d-flex justify-content-center align-items-center" th:href="@{~/auth/login}">Log in</a>
+                                </li>
+                            </ul>
+                        </nav><!-- .site-navigation -->
+
+                        <div class="hamburger-menu d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div><!-- .hamburger-menu -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div><!-- .nav-bar -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Contact</h1>
+
+                    <div class="breadcrumbs">
+                        <ul class="d-flex flex-wrap align-items-center p-0 m-0">
+                            <li><a href="#">Home</a></li>
+                            <li>Contact</li>
+                        </ul>
+                    </div><!-- .breadcrumbs -->
+
+                </div>
+            </div>
+        </div>
+
+        <img class="header-img" src="http://localhost:8080/assets/general/images/contact-bg.png" alt="">
+    </header><!-- .site-header -->
+
+    <div class="contact-page-short-boxes">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="contact-info h-100">
+                        <h2 class="d-flex align-items-center">Contact Info</h2>
+
+                        <ul class="p-0 m-0">
+                            <li><span>Addtress:</span>Mitlton Str. 26-27 London UK</li>
+                            <li><span>Phone:</span>+53 345 7953 32453</li>
+                            <li><span>Email:</span>yourmail@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4 mt-5 mt-lg-0">
+                    <div class="opening-hours h-100">
+                        <h2 class="d-flex align-items-center">Opening Hours</h2>
+
+                        <ul class="p-0 m-0">
+                            <li>Monday - Thursday <span>8.00 - 19.00</span></li>
+                            <li>Friday <span>8.00 - 18.30</span></li>
+                            <li>Saturday <span>9.30 - 17.00</span></li>
+                            <li>Sunday <span>9.30 - 15.00</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4 mt-5 mt-lg-0">
+                    <div class="emergency-box h-100">
+                        <h2 class="d-flex align-items-center">Emergency</h2>
+
+                        <div class="call-btn text-center">
+                            <a class="d-flex justify-content-center align-items-center button gradient-bg" href="#"><img src="http://localhost:8080/assets/general/images/emergency-call.png"> +707 70 70 111</a>
+                        </div>
+
+                        <p>Lorem ipsum dolor sit amet, cons ectetur adipiscing elit. Donec males uada lorem maximus mauris sceler isque, at rutrum nulla.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Get in Touch</h2>
+                </div>
+
+                <div class="col-12  col-md-4">
+                    <input type="text" placeholder="Name">
+                </div><!-- col-4 -->
+
+                <div class="col-12 col-md-4">
+                    <input type="email" placeholder="E-mail">
+                </div><!-- col-6 -->
+
+                <div class="col-12 col-md-4">
+                    <input type="text" placeholder="Subject">
+                </div>
+
+                <div class="col-12">
+                    <textarea name="name" rows="12" cols="80" placeholder="Message"></textarea>
+                </div>
+
+                <div class="col-12">
+                    <input type="submit" name="" value="Send Message" class="button gradient-bg">
+                </div>
+            </div><!-- row -->
+        </div>
+    </div><!-- contact-form -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-page-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11632.648009906072!2d76.90251293651612!3d43.206091321607914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3883698ad59add27%3A0xf9ba4757169a009c!2z0JPQsNCz0LDRgNC40L0g0L_QsNGA0Lo!5e0!3m2!1sru!2skz!4v1668421815754!5m2!1sru!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div><!-- map -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="subscribe-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <h2>Subscribe to our newsletter</h2>
+
+                    <form>
+                        <input type="email" placeholder="E-mail address">
+                        <input class="button gradient-bg" type="submit" value="Subscribe">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-widgets">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="foot-about">
+                            <h2><a href="#"><img src="http://localhost:8080/assets/general/images/logo.png" alt=""></a></h2>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien.</p>
+
+                        
+                        </div><!-- .foot-about -->
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-md-6 col-lg-4 mt-5 mt-md-0">
+                        <div class="foot-contact">
+                            <h2>Contact</h2>
+
+                            <ul class="p-0 m-0">
+                                <li><span>Addtress:</span>Kazakhstan,Alnaty Gagatin 20</li>
+                                <li><span>Phone:</span>+707 70 70 111</li>
+                                <li><span>Email:</span>medkz@gmail.com</li>
+                            </ul>
+                        </div>
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-md-6 col-lg-4 mt-5 mt-md-0">
+                        <div class="foot-links">
+                            <h2>Usefull Links</h2>
+
+                            <ul class="p-0 m-0">
+                                <li><a th:href="@{/}">Home</a></li>
+                                <li><a th:href="@{/aboutus}">About us</a></li>
+                                <li><a th:href="@{/elements}">Departments</a></li>
+                                <li><a th:href="@{/contact}">Contact</a></li>
+                                <li><a th:href="@{/news}">FAQ</a></li>
+                                <li><a th:href="@{/services}">Testimonials</a></li>
+                            </ul>
+                        </div><!-- .foot-links -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div><!-- .footer-widgets -->
+    </footer><!-- .site-footer -->
+
+    <script type='text/javascript' src='http://localhost:8080/assets/general/js/jquery.js'></script>
+    <script type='text/javascript' src='http://localhost:8080/assets/general/js/jquery.collapsible.min.js'></script>
+    <script type='text/javascript' src='http://localhost:8080/assets/general/js/swiper.min.js'></script>
+    <script type='text/javascript' src='http://localhost:8080/assets/general/js/jquery.countdown.min.js'></script>
+    <script type='text/javascript' src='http://localhost:8080/assets/general/js/circle-progress.min.js'></script>
+    <script type='text/javascript' src='http://localhost:8080/assets/general/js/jquery.countTo.min.js'></script>
+    <script type='text/javascript' src='http://localhost:8080/assets/general/js/jquery.barfiller.js'></script>
+    <script type='text/javascript' src='http://localhost:8080/assets/general/js/custom.js'></script>
+</body>
+</html>

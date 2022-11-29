@@ -33,7 +33,7 @@ public class MainController {
     public String getHomePage(Authentication authentication, Model model) {
         model.addAttribute("authentication", authentication);
         if (authentication == null)
-            return "redirect:/auth/login";
+            return "general/index";
         if (authentication.getAuthorities().contains(Role.PATIENT.getAuthoritiesList().get(0)))
             return "redirect:/patientProfile";
         if (authentication.getAuthorities().contains(Role.ADMIN.getAuthoritiesList().get(0)))
@@ -46,6 +46,11 @@ public class MainController {
             return "doctorDashboard";
         }
         return "pageHome";
+    }
+
+    @GetMapping("/index")
+    public String getIndex() {
+        return "general/index";
     }
 
     @GetMapping("/auth/login")
@@ -89,8 +94,28 @@ public class MainController {
         return "pageTest";
     }
 
-    @GetMapping("/about-us")
+    @GetMapping("/aboutus")
     public String getAboutUs() {
-        return "aboutUs";
+        return "general/about";
+    }
+
+    @GetMapping("/services")
+    public String getServices() {
+        return "general/services";
+    }
+
+    @GetMapping("/news")
+    public String getNews() {
+        return "general/news";
+    }
+
+    @GetMapping("/contact")
+    public String getContacts() {
+        return "general/contact";
+    }
+
+    @GetMapping("/elements")
+    public String getElements() {
+        return "general/elements";
     }
 }
