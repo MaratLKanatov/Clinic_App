@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Kanatov Marat
  * Date: 01.12.2022
  */
-@RestController
-@RequestMapping("msg")
+//@RestController
+//@RequestMapping("msg")
 public class KafkaEndpoint {
 
     private final KafkaService kafkaService;

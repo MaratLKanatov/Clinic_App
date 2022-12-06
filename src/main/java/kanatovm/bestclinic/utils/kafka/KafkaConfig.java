@@ -20,7 +20,7 @@ import java.util.Map;
  * @author Kanatov Marat
  * Date: 01.12.2022
  */
-@Configuration
+//@Configuration
 public class KafkaConfig {
 
     private String kafkaServer="localhost:9092";

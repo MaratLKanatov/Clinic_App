@@ -11,12 +11,12 @@ import org.springframework.kafka.annotation.KafkaListener;
 @SpringBootApplication
 public class BestClinicAppApplication {
 
-    @KafkaListener(topics="msg")
-    public void msgListener(ConsumerRecord<Long, DoctorDTO> record){
-        System.out.println(record.partition());
-        System.out.println(record.key());
-        System.out.println(record.value());
-    }
+//    @KafkaListener(topics="msg")
+//    public void msgListener(ConsumerRecord<Long, DoctorDTO> record){
+//        System.out.println(record.partition());
+//        System.out.println(record.key());
+//        System.out.println(record.value());
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(BestClinicAppApplication.class, args);
