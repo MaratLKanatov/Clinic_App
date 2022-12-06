@@ -1,5 +1,6 @@
 package kanatovm.bestclinic.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,7 @@ public class Specialization {
     private String description;
 
     @OneToMany(mappedBy = "specialization")
+    @JsonIgnore
     private List<Doctor> doctors;
 
     public Specialization() {

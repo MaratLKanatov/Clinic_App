@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,7 +53,7 @@ public class DoctorService {
     }
 
     public Doctor getCurrentDoctor(Authentication authentication) {
-        return doctorRepository.getById(userRepository.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername()).getId());
+        return doctorRepository.getById(userRepository.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername()).get().getId());
     }
 
     public List<Appointment> getWaitingAppointments(Authentication authentication) {
@@ -68,19 +69,30 @@ public class DoctorService {
     }
 
     public Doctor getById(Long id) {
-        return doctorRepository.getById(id);
+        return doctorRepository.findById(id).orElseGet(new Supplier<Doctor>() {
+            @Override
+            public Doctor get() {
+                return new Doctor();
+            }
+        });
     }
 
     public List<Doctor> getDoctorsList(Specialization specialization) {
         return doctorRepository.findAll().stream().filter(doctor -> doctor.getSpecialization().getName().equals(specialization.getName())).collect(Collectors.toList());
     }
 
-    public void saveDoctor(Doctor doctor) {
+    public Doctor saveDoctor(Doctor doctor) {
         doctorRepository.save(doctor);
+        return doctor;
     }
 
     public void saveDoctorUser(Doctor doctor) {
         userRepository.save(doctor.getUser());
         doctorRepository.save(doctor);
+    }
+
+    public void removeDoctor(final Long doctor_id) {
+        doctorRepository.deleteById(doctor_id);
+        userRepository.deleteById(doctor_id);
     }
 }

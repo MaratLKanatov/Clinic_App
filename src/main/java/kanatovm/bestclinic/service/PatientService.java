@@ -33,7 +33,7 @@ public class PatientService {
     }
 
     public Patient getCurrentPatient(Authentication authentication) {
-        return patientRepository.getById(userRepository.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername()).getId());
+        return patientRepository.getById(userRepository.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername()).get().getId());
     }
 
     public void updatePatient(Patient patient) {

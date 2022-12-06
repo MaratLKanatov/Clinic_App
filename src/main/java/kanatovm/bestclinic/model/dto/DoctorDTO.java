@@ -5,16 +5,18 @@ import kanatovm.bestclinic.model.entities.Specialization;
 import kanatovm.bestclinic.model.entities.User;
 import kanatovm.bestclinic.model.enums.Role;
 import kanatovm.bestclinic.model.enums.Status;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
-@Setter
-@Getter
+@Data
+@Builder
+@AllArgsConstructor
 public class DoctorDTO {
     private String email;
     private String password;
@@ -34,15 +36,17 @@ public class DoctorDTO {
 
     }
 
-    public Doctor getDoctor() {
+    public Doctor toDoctor() {
         User user = new User();
         user.setEmail(email);
-        user.setPassword(new BCryptPasswordEncoder(12).encode(password));
+        if (password != null)
+            user.setPassword(new BCryptPasswordEncoder(12).encode(password));
         user.setStatus(Status.ACTIVE);
         user.setRole(Role.PATIENT);
 
         Doctor doctor = new Doctor();
 
+        if (birthdate != null)
         doctor.setBirthdate(new Timestamp(birthdate.getYear(), birthdate.getMonth(), birthdate.getDate(), getHourMinute().getHour(), getHourMinute().getMinute(), 0,0));
         // Timestamp.valueOf("2018-11-12 01:02:03.123456789")
 
@@ -54,5 +58,18 @@ public class DoctorDTO {
         doctor.setUser(user);
         doctor.setSpecialization(specialization);
         return doctor;
+    }
+
+    public static DoctorDTO fromDto(Doctor doctor) {
+        return DoctorDTO.builder()
+                        .birthdate(doctor.getBirthdate())
+                        .email(doctor.getUser().getEmail())
+                        .firstname(doctor.getFirstname())
+                        .gender(doctor.getGender())
+                        .lastname(doctor.getLastname())
+                        .location(doctor.getLocation())
+                        //.specialization(doctor.getSpecialization())
+                        .telnum(doctor.getTelnum())
+                        .build();
     }
 }

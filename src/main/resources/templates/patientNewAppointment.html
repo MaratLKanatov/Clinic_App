@@ -161,18 +161,52 @@
             form.action = '/patient/newAppointment/change';
             form.submit();
         });
-    $('#selectDoctor').change(
-        function(){
-            form = document.getElementById('myForm');
-            form.action = '/patient/newAppointment/change';
-            form.submit();
-        });
+    // $('#selectDoctor').change(
+    //     function(){
+    //         form = document.getElementById('myForm');
+    //         form.action = '/patient/newAppointment/change';
+    //         form.submit();
+    //     });
     $('#selectSpecialization').change(
         function(){
-            form = document.getElementById('myForm');
-            form.action = '/patient/newAppointment/change';
-            form.submit();
+            let specId = document.getElementById('selectSpecialization').value;
+            const request = new XMLHttpRequest();
+            const url = 'http://localhost:8080/api/doctor/doctors_by_specialization?specialization_id=' + specId;
+            console.log(url);
+            request.open("GET", url);
+            request.send();
+
+            request.onload = (e) => {
+                let select = document.getElementById('selectDoctor');
+                select.replaceChildren();
+                let value = JSON.parse(request.response);
+                console.log(value);
+                for (let i=0; i<value.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = value[i].id;
+                    opt.innerHTML = value[i].firstname + ' ' + value[i].lastname;
+                    select.appendChild(opt);
+                }
+            }
         });
+    // $('#meeting').change(
+    //     function(){
+    //         form = document.getElementById('myForm');
+    //         form.action = '/patient/newAppointment/change';
+    //         form.submit();
+    //     });
+    // $('#selectDoctor').change(
+    //     function(){
+    //         form = document.getElementById('myForm');
+    //         form.action = '/patient/newAppointment/change';
+    //         form.submit();
+    //     });
+    // $('#selectSpecialization').change(
+    //     function(){
+    //         form = document.getElementById('myForm');
+    //         form.action = '/patient/newAppointment/change';
+    //         form.submit();
+    //     });
 </script>
 </body>
 </html>

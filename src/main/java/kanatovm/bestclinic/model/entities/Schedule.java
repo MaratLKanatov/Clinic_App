@@ -1,5 +1,6 @@
 package kanatovm.bestclinic.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,6 +43,7 @@ public class Schedule {
     private String sunday;
 
     @OneToMany(mappedBy = "schedule")
+    @JsonIgnore
     private List<Doctor> doctors;
 
     public Schedule(Long id, String name, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) {

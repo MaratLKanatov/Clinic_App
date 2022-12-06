@@ -1,10 +1,12 @@
 package kanatovm.bestclinic.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
@@ -14,7 +16,9 @@ import java.util.Set;
 @Table(name = "doctors")
 @Getter
 @Setter
-public class Doctor {
+public class Doctor implements Serializable {
+    private static final long serialVersionUID = 347568673L;
+
     @Id
     private Long id;
 
@@ -43,6 +47,7 @@ public class Doctor {
     private User user;
 
     @OneToMany(mappedBy = "doctor")
+    @JsonIgnore
     private Set<Appointment> appointments;
 
     @ManyToOne
