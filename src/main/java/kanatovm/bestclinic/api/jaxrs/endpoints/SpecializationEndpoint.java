@@ -6,9 +6,8 @@ import kanatovm.bestclinic.repository.SpecializationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -18,7 +17,8 @@ import java.util.List;
  */
 
 @Component
-@Path(value = ApiConstants.VERSION) // /api/public/v1/specialization/all
+@Path(value = ApiConstants.VERSION + SpecializationEndpoint.RESOURCE_KEY) // /api/public/v1/specialization
+@Produces("application/json")
 public class SpecializationEndpoint {
 
     public static final String RESOURCE_KEY = "/specialization";
@@ -27,10 +27,42 @@ public class SpecializationEndpoint {
     private SpecializationRepository specializationRepository;
 
     @GET
-    @Path(value = SpecializationEndpoint.RESOURCE_KEY)
-    @Produces("application/json")
     public List<Specialization> getAll() {
         return specializationRepository.findAll();
     }
 
+    @Path("/{id}")
+    @GET
+    public Response getEntityById(@PathParam("id") Long id) {
+        return Response.ok(specializationRepository.findById(id)).build();
+    }
+
+    @POST
+    @Consumes("application/json")
+    public Response createEntity(Specialization specialization) {
+        return Response.ok().entity(specializationRepository.save(specialization)).build();
+    }
+
+    @Path("/{id}")
+    @PUT
+    @Consumes("application/json")
+    public Response updateEntity(@PathParam("id") Long id, Specialization specialization) {
+        specialization.setId(id);
+        Specialization specialization1 = specializationRepository.findById(id).orElseGet(null);
+        if (specialization1 != null)
+            return Response.ok().entity(specializationRepository.save(specialization)).build();
+        else
+            return Response.noContent().build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteConfiguration(@PathParam("id") Long id){
+        Specialization specialization = specializationRepository.findById(id).orElseGet(null);
+        if (specialization != null)
+            specializationRepository.delete(specialization);
+        else
+            return Response.noContent().build();
+        return Response.ok().entity("OK! Deleted by id: " + id).build();
+    }
 }

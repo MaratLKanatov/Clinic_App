@@ -2,6 +2,7 @@ package kanatovm.bestclinic.api.jaxrs;
 
 import kanatovm.bestclinic.api.jaxrs.endpoints.SpecializationEndpoint;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.springdoc.webmvc.api.OpenApiResource;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.ApplicationPath;
@@ -20,5 +21,7 @@ public class JerseyConfig extends ResourceConfig {
 
     private void registerEndpoints() {
         register(SpecializationEndpoint.class);
+        packages("kanatovm.bestclinic.api.jaxrs");
+        register(OpenApiResource.class);
     }
 }
